@@ -14,9 +14,7 @@ interface AppState {
     genreListId: string;
     activeSong: any;
     isPlaying: boolean;
-    // Add any other properties you have in the player state
   };
-  // Add any other slices of the state
 }
 
 @Component({

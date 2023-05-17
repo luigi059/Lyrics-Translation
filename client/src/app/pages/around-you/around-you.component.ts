@@ -1,11 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
 import { ShazamService } from '../../services/shazam.service';
 
 interface AppState {
   player: {
-    genreListId: string;
     activeSong: any;
     isPlaying: boolean;
   };
@@ -16,7 +15,7 @@ interface AppState {
   templateUrl: './around-you.component.html',
   styleUrls: ['./around-you.component.css'],
 })
-export class AroundYouComponent implements OnInit {
+export class AroundYouComponent {
   isLoading = true;
   activeSong$: Observable<any>;
   isPlaying$: Observable<boolean>;
@@ -39,8 +38,5 @@ export class AroundYouComponent implements OnInit {
         this.error = true;
       }
     );
-  }
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
   }
 }
