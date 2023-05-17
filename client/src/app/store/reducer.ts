@@ -1,19 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
+import { PlayerState } from '../shared/interface';
 import * as PlayerActions from './player.actions';
-
-interface Song {
-  track?: any; // Replace `any` with the actual type
-  // other properties...
-}
-
-interface PlayerState {
-  currentSongs: Song[];
-  currentIndex: number;
-  isActive: boolean;
-  isPlaying: boolean;
-  activeSong: Song;
-  genreListId: string;
-}
 
 export const initialState: PlayerState = {
   currentSongs: [],

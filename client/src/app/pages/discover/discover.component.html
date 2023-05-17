@@ -1,42 +1,41 @@
-<div *ngIf="playerService.isFetching; else notLoading" class="loader">
-  Loading songs...
+<div class="flex flex-col" *ngIf="!isLoading; else loading">
+  <div
+    class="w-full flex justify-between items-center sm:flex-row flex-col mt-4 mb-10"
+  >
+    <h2 class="font-bold text-3xl text-white text-left">
+      Discover {{ genreTitle }}
+    </h2>
+
+    <select
+      (change)="onGenreChange($event)"
+      [value]="genreListId$ | async"
+      class="bg-black text-gray-300 p-3 text-sm rounded-lg outline-none sm:mt-0 mt-5"
+    >
+      <option *ngFor="let genre of genres" [value]="genre.value">
+        {{ genre.title }}
+      </option>
+    </select>
+  </div>
+
+  <div class="flex flex-wrap sm:justify-start justify-center gap-8">
+    <div *ngFor="let song of data$ | async; let i = index">
+      <!--       <app-song-card
+        [key]="song.key"
+        [song]="song"
+        [isPlaying]="isPlaying$ | async"
+        [activeSong]="activeSong$ | async"
+        [data]="data$ | async"
+        [i]="i"
+        (click)="playSong(song, data$ | async, i)"
+      ></app-song-card> -->
+    </div>
+  </div>
 </div>
 
-<ng-template #notLoading>
-  <div *ngIf="playerService.error">
-    <app-error></app-error>
-  </div>
-  <div *ngIf="!playerService.error" class="flex flex-col">
-    <div
-      class="w-full flex justify-between items-center sm:flex-row flex-col mt-4 mb-10"
-    >
-      <h2 class="font-bold text-3xl text-white text-left">
-        Discover {{ playerService.genreTitle }}
-      </h2>
+<ng-template #loading>
+  <!--   <app-loader title="Loading songs..."></app-loader> -->
+</ng-template>
 
-      <select
-        (change)="onGenreChange($event.target.value)"
-        [(ngModel)]="playerService.genreListId"
-        class="bg-black text-gray-300 p-3 text-sm rounded-lg outline-none sm:mt-0 mt-5"
-      >
-        <option
-          *ngFor="let genre of playerService.genres"
-          [value]="genre.value"
-        >
-          {{ genre.title }}
-        </option>
-      </select>
-    </div>
-
-    <div class="flex flex-wrap sm:justify-start justify-center gap-8">
-      <app-song-card
-        *ngFor="let song of playerService.songs; index as i"
-        [song]="song"
-        [isPlaying]="playerService.isPlaying"
-        [activeSong]="playerService.activeSong"
-        [data]="playerService.songs"
-        [i]="i"
-      ></app-song-card>
-    </div>
-  </div>
+<ng-template #error>
+  <!--   <app-error></app-error> -->
 </ng-template>
