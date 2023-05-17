@@ -19,15 +19,13 @@
 
   <div class="flex flex-wrap sm:justify-start justify-center gap-8">
     <div *ngFor="let song of data$ | async; let i = index">
-      <!--       <app-song-card
-        [key]="song.key"
+      <app-song-card
         [song]="song"
         [isPlaying]="isPlaying$ | async"
         [activeSong]="activeSong$ | async"
         [data]="data$ | async"
         [i]="i"
-        (click)="playSong(song, data$ | async, i)"
-      ></app-song-card> -->
+      ></app-song-card>
     </div>
   </div>
 </div>

@@ -29,7 +29,7 @@ export class DiscoverComponent implements OnInit {
   activeSong$: Observable<any>;
   isPlaying$: Observable<boolean>;
   data$: Observable<any> | undefined;
-  genreTitle: string | undefined = '';
+  genreTitle: string | undefined = 'Pop';
   isLoading = true;
   error = false;
   genres: { title: string; value: string }[] = genres;
@@ -63,6 +63,7 @@ export class DiscoverComponent implements OnInit {
       ({ value }) => value === event.target.value
     )?.title;
     this.store.dispatch(selectGenreListId({ id: event.target.value }));
+    console.log(this.store.select('player', 'genreListId'));
   }
 
   playSong(song: any, data: any, i: any) {

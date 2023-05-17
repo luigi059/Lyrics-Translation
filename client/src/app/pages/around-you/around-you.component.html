@@ -1,1 +1,20 @@
-<p>around-you works!</p>
+<!-- <app-loader *ngIf="isLoading" title="Loading Songs around you..."></app-loader>
+<app-error *ngIf="error"></app-error> -->
+
+<div class="flex flex-col" *ngIf="!isLoading">
+  <h2 class="font-bold text-3xl text-white text-left mt-4 mb-10">
+    Top Charts in Ireland
+  </h2>
+
+  <div class="flex flex-wrap sm:justify-start justify-center gap-8">
+    <app-song-card
+      *ngFor="let song of data$ | async; index as i"
+      [song]="song"
+      [isPlaying]="isPlaying$ | async"
+      [activeSong]="activeSong$ | async"
+      [data]="data$ | async"
+      [i]="i"
+    >
+    </app-song-card>
+  </div>
+</div>

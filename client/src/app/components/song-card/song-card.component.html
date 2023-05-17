@@ -1,1 +1,44 @@
-<p>song-card works!</p>
+<div
+  class="flex flex-col w-[250px] p-4 bg-white/5 bg-opacity-80 backdrop-blur-sm animate-slideup rounded-lg cursor-pointer"
+>
+  <div class="relative w-full h-56 group">
+    <div
+      class="absolute inset-0 justify-center items-center bg-black bg-opacity-50 group-hover:flex"
+      [class.hidden]="activeSong?.title !== song.title"
+      [class.flex]="activeSong?.title === song.title"
+      [class.bg-black]="activeSong?.title === song.title"
+      [class.bg-opacity-70]="activeSong?.title === song.title"
+    >
+      <!--       <app-play-pause
+        [isPlaying]="isPlaying"
+        [activeSong]="activeSong"
+        [song]="song"
+        (handlePause)="handlePauseClick()"
+        (handlePlay)="handlePlayClick()"
+      >
+      </app-play-pause> -->
+    </div>
+    <img
+      alt="song_img"
+      [src]="song.images?.coverart"
+      class="w-full h-full rounded-lg"
+    />
+  </div>
+
+  <div class="mt-4 flex flex-col">
+    <p class="font-semibold text-lg text-white truncate">
+      <a [routerLink]="['/songs', song?.key]">{{ song.title }}</a>
+    </p>
+    <p class="text-sm truncate text-gray-300 mt-1">
+      <a
+        [routerLink]="
+          song.artists
+            ? ['/artists', song?.artists[0]?.adamid]
+            : ['/top-artists']
+        "
+      >
+        {{ song.subtitle }}
+      </a>
+    </p>
+  </div>
+</div>
