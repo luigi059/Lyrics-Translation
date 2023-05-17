@@ -1,39 +1,40 @@
-<div class="flex flex-col" *ngIf="!isLoading; else loading">
-  <div
-    class="w-full flex justify-between items-center sm:flex-row flex-col mt-4 mb-10"
-  >
-    <h2 class="font-bold text-3xl text-white text-left">
-      Discover {{ genreTitle }}
-    </h2>
-
-    <select
-      (change)="onGenreChange($event)"
-      [value]="genreListId$ | async"
-      class="bg-black text-gray-300 p-3 text-sm rounded-lg outline-none sm:mt-0 mt-5"
+<div class="flex flex-col">
+  <ng-container *ngIf="!isLoading && !error">
+    <div
+      class="w-full flex justify-between items-center sm:flex-row flex-col mt-4 mb-10"
     >
-      <option *ngFor="let genre of genres" [value]="genre.value">
-        {{ genre.title }}
-      </option>
-    </select>
-  </div>
-
-  <div class="flex flex-wrap sm:justify-start justify-center gap-8">
-    <div *ngFor="let song of data$ | async; let i = index">
-      <app-song-card
-        [song]="song"
-        [isPlaying]="isPlaying$ | async"
-        [activeSong]="activeSong$ | async"
-        [data]="data$ | async"
-        [i]="i"
-      ></app-song-card>
+      <h2 class="font-bold text-3xl text-white text-left">
+        Discover {{ genreTitle }}
+      </h2>
+      <select
+        (change)="onGenreChange($event)"
+        [value]="genreListId$ | async"
+        class="bg-black text-gray-300 p-3 text-sm rounded-lg outline-none sm:mt-0 mt-5"
+      >
+        <option *ngFor="let genre of genres" [value]="genre.value">
+          {{ genre.title }}
+        </option>
+      </select>
     </div>
-  </div>
+
+    <div class="flex flex-wrap sm:justify-start justify-center gap-8">
+      <div *ngFor="let song of data$ | async; let i = index">
+        <app-song-card
+          [song]="song"
+          [isPlaying]="isPlaying$ | async"
+          [activeSong]="activeSong$ | async"
+          [data]="data$ | async"
+          [i]="i"
+        ></app-song-card>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="isLoading">
+    <app-loader title="Loading songs..."></app-loader>
+  </ng-container>
+
+  <ng-container *ngIf="error">
+    <app-error></app-error>
+  </ng-container>
 </div>
-
-<ng-template #loading>
-  <!--   <app-loader title="Loading songs..."></app-loader> -->
-</ng-template>
-
-<ng-template #error>
-  <!--   <app-error></app-error> -->
-</ng-template>

@@ -43,7 +43,6 @@ export class DiscoverComponent implements OnInit {
     this.genreListId$.subscribe((genreListId) => {
       this.shazamCoreService.getSongsByGenre(genreListId || 'POP').subscribe(
         (data) => {
-          console.log(data);
           this.data$ = of(data);
           this.isLoading = false;
         },
@@ -61,7 +60,6 @@ export class DiscoverComponent implements OnInit {
       ({ value }) => value === event.target.value
     )?.title;
     this.store.dispatch(selectGenreListId({ id: event.target.value }));
-    console.log(this.store.select('player', 'genreListId'));
   }
 
   playSong(song: any, data: any, i: any) {
