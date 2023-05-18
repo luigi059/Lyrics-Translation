@@ -22,7 +22,6 @@ export class RelatedSongsComponent {
   }
 
   handlePlayClick(event: any) {
-    console.log(this.data);
     this.handlePlay.emit({ song: event.song, index: event.index });
   }
 }

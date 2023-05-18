@@ -27,7 +27,6 @@ export class SongBarComponent {
   }
 
   navigateToArtist(): void {
-    console.log(this.artistId);
     if (this.artistId) {
       this.router.navigate([`/artists/${this.artistId}`]);
     }

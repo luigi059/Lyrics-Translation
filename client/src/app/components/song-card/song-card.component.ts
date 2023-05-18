@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { playPause, setActiveSong } from '../../store/player.actions';
 
@@ -7,7 +7,7 @@ import { playPause, setActiveSong } from '../../store/player.actions';
   templateUrl: './song-card.component.html',
   styleUrls: ['./song-card.component.css'],
 })
-export class SongCardComponent {
+export class SongCardComponent implements OnInit {
   @Input() song: any;
   @Input() isPlaying: boolean | null = false;
   @Input() activeSong: any;
@@ -15,6 +15,7 @@ export class SongCardComponent {
   @Input() i: number = 0;
 
   constructor(private store: Store) {}
+  ngOnInit(): void {}
 
   handlePauseClick() {
     this.store.dispatch(playPause({ playing: false }));

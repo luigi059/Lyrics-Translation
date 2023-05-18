@@ -1,0 +1,54 @@
+<div class="flex">
+  <div class="flex-1 w-90">
+    <form
+      (submit)="handleSubmit()"
+      autocomplete="off"
+      class="p-2 text-gray-400 focus-within:text-gray-600"
+    >
+      <label for="search-field" class="sr-only">Search all files</label>
+      <div class="flex flex-row justify-start items-center">
+        <mat-icon aria-hidden="true" class="w-5 h-5 ml-4">search</mat-icon>
+        <input
+          name="search-field"
+          autocomplete="off"
+          id="search-field"
+          class="flex-1 bg-transparent border-none placeholder-gray-500 outline-none text-base text-white p-4"
+          placeholder="Search"
+          type="search"
+          [(ngModel)]="searchTerm"
+        />
+      </div>
+    </form>
+  </div>
+
+  <div class="flex-1 w-10">
+    <ng-container *ngIf="isLogged; else loginRegister">
+      <div class="flex justify-end items-center mr-10 h-full">
+        <div class="profile-container">
+          <div (click)="toggleDropdown()">
+            <img
+              [src]="user.user.picturePath"
+              height="32px"
+              width="32px"
+              class="profile-img"
+              alt="profile"
+            />
+          </div>
+          <div class="profile-dropdown" *ngIf="showDropdown">
+            <p (click)="logout()">Logout</p>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-template #loginRegister>
+      <div class="flex justify-end items-center mr-10 h-full">
+        <div>
+          <a routerLink="/auth" class="uppercase text-white"
+            >Login ✥ Register</a
+          >
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</div>

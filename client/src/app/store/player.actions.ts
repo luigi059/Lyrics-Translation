@@ -24,3 +24,13 @@ export const selectGenreListId = createAction(
   '[Player] Select Genre List Id',
   props<{ id: string }>()
 );
+
+export const updateToken = createAction(
+  '[Player] Update Token',
+  props<{ token: any }>()
+);
+
+export const updateUser = createAction(
+  '[Player] Update User',
+  props<{ user: any }>()
+);

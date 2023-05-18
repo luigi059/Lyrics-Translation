@@ -1,6 +1,5 @@
 interface Song {
-  track?: any; // Replace `any` with the actual type
-  // other properties...
+  track?: any;
 }
 
 export interface PlayerState {
@@ -10,4 +9,6 @@ export interface PlayerState {
   isPlaying: boolean;
   activeSong: Song;
   genreListId: string;
+  token: string;
+  user: any;
 }

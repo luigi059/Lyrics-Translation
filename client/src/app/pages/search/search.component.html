@@ -1,0 +1,29 @@
+<div class="flex flex-col">
+  <ng-container *ngIf="!isLoading && !error">
+    <h2 class="font-bold text-3xl text-white text-left mt-4 mb-10">
+      Showing results for <span class="font-black">{{ searchTerm }}</span>
+    </h2>
+    <div class="flex flex-wrap sm:justify-start justify-center gap-8">
+      <ng-container *ngIf="data$ | async as data">
+        <div *ngFor="let song of data.tracks.hits; let i = index">
+          <app-song-card
+            [song]="song.track"
+            [isPlaying]="isPlaying$ | async"
+            [activeSong]="activeSong$ | async"
+            [data]="data"
+            [i]="i"
+          >
+          </app-song-card>
+        </div>
+      </ng-container>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="isLoading">
+    <app-loader [title]="'Searching ' + searchTerm + '...'"></app-loader>
+  </ng-container>
+
+  <ng-container *ngIf="error">
+    <app-error></app-error>
+  </ng-container>
+</div>

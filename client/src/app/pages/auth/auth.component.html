@@ -1,0 +1,88 @@
+<div class="max-w-xs border-2 border-blue-400 rounded p-8 m-auto mt-10">
+  <ng-container *ngIf="!isLoading && !error && isRegister">
+    <form
+      [formGroup]="registerForm"
+      (ngSubmit)="onRegister()"
+      enctype="multipart/form-data"
+    >
+      <h2 class="text-lg uppercase tracking-wider text-gray-500">Register</h2>
+      <input
+        type="text"
+        formControlName="name"
+        placeholder="Name"
+        class="w-full h-10 mt-4 p-2 border-2 border-blue-400 outline-none"
+      />
+      <input
+        type="email"
+        formControlName="email"
+        placeholder="Email"
+        class="w-full h-10 mt-4 p-2 border-2 border-blue-400 outline-none"
+      />
+      <input
+        type="password"
+        formControlName="password"
+        placeholder="Password"
+        class="w-full h-10 mt-4 p-2 border-2 border-blue-400 outline-none"
+      />
+      <div>
+        <label>File:</label>
+        <input type="file" (change)="onFileSelect($event)" />
+      </div>
+      <div class="flex justify-between items-center mt-4">
+        <button
+          type="submit"
+          class="w-36 h-10 bg-blue-400 text-white uppercase tracking-wider"
+        >
+          Register
+        </button>
+        <p
+          routerLink="/register"
+          class="text-orange-500 tracking-wide uppercase"
+          (click)="changeForm()"
+        >
+          LogIn
+        </p>
+      </div>
+    </form>
+  </ng-container>
+
+  <ng-container *ngIf="!isLoading && !error && !isRegister">
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+      <h2 class="text-lg uppercase tracking-wider text-gray-500">Login</h2>
+      <input
+        type="email"
+        formControlName="email"
+        placeholder="Email"
+        class="w-full h-10 mt-4 p-2 border-2 border-blue-400 outline-none"
+      />
+      <input
+        type="password"
+        formControlName="password"
+        placeholder="Password"
+        class="w-full h-10 mt-4 p-2 border-2 border-blue-400 outline-none"
+      />
+      <div class="flex justify-between items-center mt-4">
+        <button
+          type="submit"
+          class="w-36 h-10 bg-blue-400 text-white uppercase tracking-wider"
+        >
+          LogIn
+        </button>
+        <p
+          class="text-orange-500 tracking-wide uppercase"
+          (click)="changeForm()"
+        >
+          Register
+        </p>
+      </div>
+    </form>
+  </ng-container>
+
+  <ng-container *ngIf="isLoading">
+    <app-loader title="Loading songs..."></app-loader>
+  </ng-container>
+
+  <ng-container *ngIf="error">
+    <app-error></app-error>
+  </ng-container>
+</div>

@@ -9,6 +9,8 @@ export const initialState: PlayerState = {
   isPlaying: false,
   activeSong: {},
   genreListId: '',
+  token: '',
+  user: {},
 };
 
 export const playerReducer = createReducer(
@@ -55,5 +57,11 @@ export const playerReducer = createReducer(
   }),
   on(PlayerActions.selectGenreListId, (state, { id }) => {
     return { ...state, genreListId: id };
+  }),
+  on(PlayerActions.updateToken, (state, { token }) => {
+    return { ...state, token: token };
+  }),
+  on(PlayerActions.updateUser, (state, { user }) => {
+    return { ...state, user: user };
   })
 );
