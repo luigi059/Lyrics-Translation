@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Store, select } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
 import { ShazamService } from '../../services/shazam.service';
+import { playPause, setActiveSong } from '../../store/player.actions';
 
 interface State {
   player: {
@@ -41,5 +42,15 @@ export class ArtistDetailsComponent {
         this.error = true;
       }
     );
+  }
+  handlePause() {
+    this.store.dispatch(playPause({ playing: false }));
+  }
+
+  handlePlay(event: any) {
+    this.store.dispatch(
+      setActiveSong({ song: event.song, data: this.data$, i: event.index })
+    );
+    this.store.dispatch(playPause({ playing: true }));
   }
 }

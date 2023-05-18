@@ -7,12 +7,22 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class RelatedSongsComponent {
   @Input() data: any[] | undefined;
-  @Input() artistId: string | undefined;
+  @Input() artistId: string | null = '';
   @Input() isPlaying: boolean | null = false;
   @Input() activeSong: any;
 
-  @Output() handlePauseClick: EventEmitter<any> = new EventEmitter();
-  @Output() handlePlayClick: EventEmitter<any> = new EventEmitter();
+  @Output() handlePause: EventEmitter<any> = new EventEmitter();
+  @Output() handlePlay: EventEmitter<{ song: any; index: number }> =
+    new EventEmitter();
 
   constructor() {}
+
+  handlePauseClick() {
+    this.handlePause.emit();
+  }
+
+  handlePlayClick(event: any) {
+    console.log(this.data);
+    this.handlePlay.emit({ song: event.song, index: event.index });
+  }
 }

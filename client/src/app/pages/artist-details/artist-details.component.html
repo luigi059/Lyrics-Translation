@@ -10,6 +10,8 @@
       [artistId]="artistId"
       [isPlaying]="isPlaying$ | async"
       [activeSong]="activeSong$ | async"
+      (handlePause)="handlePause()"
+      (handlePlay)="handlePlay($event)"
     ></app-related-songs>
   </ng-container>
 

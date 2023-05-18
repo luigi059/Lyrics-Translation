@@ -47,14 +47,14 @@ export class ShazamService {
     );
   }
 
-  getSongDetails(songid: string) {
+  getSongDetails(songid: string | null) {
     return this.http.get(
       `${this.baseUrl}v1/tracks/details?track_id=${songid}`,
       { headers: this.headers }
     );
   }
 
-  getSongRelated(songid: string) {
+  getSongRelated(songid: string | null) {
     return this.http.get(
       `${this.baseUrl}v1/tracks/related?track_id=${songid}`,
       { headers: this.headers }

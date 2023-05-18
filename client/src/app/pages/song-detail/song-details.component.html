@@ -1,0 +1,37 @@
+<div class="flex flex-col">
+  <app-details-header
+    [artistId]="artistId"
+    [songData]="songData"
+  ></app-details-header>
+
+  <div class="mb-10">
+    <h2 class="text-white text-3xl font-bold">Lyrics:</h2>
+
+    <div class="mt-5">
+      <ng-container
+        *ngIf="songData?.sections[1].type === 'LYRICS'; else noLyrics"
+      >
+        <p
+          *ngFor="let line of songData.sections[1].text; index as i"
+          class="text-gray-400 text-base my-1"
+        >
+          {{ line }}
+        </p>
+      </ng-container>
+
+      <ng-template #noLyrics>
+        <p class="text-gray-400 text-base my-1">Sorry, No lyrics found!</p>
+      </ng-template>
+    </div>
+  </div>
+
+  <app-related-songs
+    [data]="data"
+    [artistId]="artistId"
+    [isPlaying]="isPlaying$ | async"
+    [activeSong]="activeSong$ | async"
+    (handlePause)="handlePause()"
+    (handlePlay)="handlePlay($event)"
+  >
+  </app-related-songs>
+</div>

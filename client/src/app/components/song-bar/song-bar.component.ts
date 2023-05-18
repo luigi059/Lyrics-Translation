@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-song-bar',
@@ -8,9 +9,27 @@ import { Component, Input } from '@angular/core';
 export class SongBarComponent {
   @Input() song: any;
   @Input() i: number = 0;
-  @Input() artistId: string | undefined;
+  @Input() artistId: string | null = '';
   @Input() isPlaying: boolean | null = false;
   @Input() activeSong: any;
 
-  constructor() {}
+  @Output() handlePause: EventEmitter<void> = new EventEmitter();
+  @Output() handlePlay: EventEmitter<{ song: any; index: number }> =
+    new EventEmitter();
+
+  constructor(private router: Router) {}
+
+  handlePauseClick(): void {
+    this.handlePause.emit();
+  }
+  handlePlayClick(): void {
+    this.handlePlay.emit({ song: this.song, index: this.i });
+  }
+
+  navigateToArtist(): void {
+    console.log(this.artistId);
+    if (this.artistId) {
+      this.router.navigate([`/artists/${this.artistId}`]);
+    }
+  }
 }

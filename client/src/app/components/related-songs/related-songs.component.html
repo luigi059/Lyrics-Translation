@@ -9,6 +9,8 @@
       [artistId]="artistId"
       [isPlaying]="isPlaying"
       [activeSong]="activeSong"
+      (handlePause)="handlePauseClick()"
+      (handlePlay)="handlePlayClick($event)"
     >
     </app-song-bar>
   </div>
