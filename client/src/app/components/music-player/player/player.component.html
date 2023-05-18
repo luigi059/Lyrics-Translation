@@ -1,0 +1,8 @@
+<audio
+  #audioElement
+  [src]="activeSong?.hub?.actions[1]?.uri"
+  [loop]="repeat"
+  (ended)="handleEnded()"
+  (timeupdate)="handleTimeUpdate()"
+  (loadeddata)="handleLoadedData()"
+></audio>

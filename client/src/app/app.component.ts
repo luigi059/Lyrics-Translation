@@ -1,4 +1,12 @@
 import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+
+interface State {
+  player: {
+    activeSong: {};
+  };
+}
 
 @Component({
   selector: 'app-root',
@@ -6,7 +14,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  activeSong: any;
+  activeSong$: Observable<any>;
 
-  constructor() {}
+  constructor(private store: Store<State>) {
+    this.activeSong$ = this.store.select((state) => state.player.activeSong);
+  }
 }

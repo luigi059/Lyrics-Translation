@@ -1,0 +1,32 @@
+<div class="hidden lg:flex flex-1 items-center justify-end">
+  <mat-icon
+    [ngStyle]="{ color: 'white' }"
+    *ngIf="value <= 1 && value > 0.5"
+    class="material-icons"
+    (click)="mute()"
+    >volume_up</mat-icon
+  >
+  <mat-icon
+    [ngStyle]="{ color: 'white' }"
+    *ngIf="value <= 0.5 && value > 0"
+    class="material-icons"
+    (click)="mute()"
+    >volume_down</mat-icon
+  >
+  <mat-icon
+    [ngStyle]="{ color: 'white' }"
+    *ngIf="value === 0"
+    class="material-icons"
+    (click)="unmute()"
+    >volume_off</mat-icon
+  >
+  <input
+    type="range"
+    step="any"
+    [value]="value"
+    [min]="min"
+    [max]="max"
+    (change)="onVolumeChange($event)"
+    class="2xl:w-40 lg:w-32 md:w-32 h-1 ml-2"
+  />
+</div>

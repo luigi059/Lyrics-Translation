@@ -30,7 +30,6 @@ export class TopChartsComponent {
     this.isPlaying$ = this.store.pipe(select('player', 'isPlaying'));
     this.shazamCoreService.getTopCharts().subscribe(
       (data) => {
-        console.log(data);
         this.data$ = of(data);
         this.isLoading = false;
       },

@@ -1,0 +1,13 @@
+<mat-icon
+  class="text-gray-300"
+  *ngIf="isPlaying && activeSong?.title === song.title; else playIcon"
+  (click)="onHandlePause()"
+>
+  pause_circle_filled
+</mat-icon>
+
+<ng-template #playIcon>
+  <mat-icon class="text-gray-300" (click)="onHandlePlay()">
+    play_circle_filled
+  </mat-icon>
+</ng-template>

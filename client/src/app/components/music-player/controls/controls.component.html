@@ -1,0 +1,41 @@
+<div class="flex items-center justify-around md:w-36 lg:w-52 2xl:w-80">
+  <mat-icon
+    (click)="toggleRepeat()"
+    [style.color]="repeat ? 'blue' : 'white'"
+    class="hidden sm:block cursor-pointer"
+    >repeat</mat-icon
+  >
+
+  <ng-container *ngIf="currentSongs?.length">
+    <mat-icon
+      [ngStyle]="{ color: 'white' }"
+      (click)="handlePrevSong.emit()"
+      class="cursor-pointer"
+      >skip_previous</mat-icon
+    >
+  </ng-container>
+
+  <mat-icon
+    [ngStyle]="{ color: 'white' }"
+    (click)="handlePlayPause.emit()"
+    class="cursor-pointer"
+  >
+    {{ isPlaying ? "pause" : "play_arrow" }}
+  </mat-icon>
+
+  <ng-container *ngIf="currentSongs?.length">
+    <mat-icon
+      [ngStyle]="{ color: 'white' }"
+      (click)="handleNextSong.emit()"
+      class="cursor-pointer"
+      >skip_next</mat-icon
+    >
+  </ng-container>
+
+  <mat-icon
+    (click)="toggleShuffle()"
+    [style.color]="shuffle ? 'blue' : 'white'"
+    class="hidden sm:block cursor-pointer"
+    >shuffle</mat-icon
+  >
+</div>

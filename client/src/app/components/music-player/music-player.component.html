@@ -1,0 +1,44 @@
+<div class="relative sm:px-12 px-8 w-full flex items-center justify-between">
+  <app-track
+    [isPlaying]="isPlaying$ | async"
+    [isActive]="isActive$ | async"
+    [activeSong]="activeSong$ | async"
+  ></app-track>
+  <div class="flex-1 flex flex-col items-center justify-center">
+    <app-controls
+      [isPlaying]="isPlaying$ | async"
+      [repeat]="repeat"
+      [shuffle]="shuffle"
+      [currentSongs]="currentSongs$ | async"
+      (setRepeat)="setRepeat($event)"
+      (setShuffle)="setShuffle($event)"
+      (handlePlayPause)="handlePlayPause()"
+      (handlePrevSong)="handlePrevSong()"
+      (handleNextSong)="handleNextSong()"
+    ></app-controls>
+    <app-seekbar
+      [value]="appTime"
+      [min]="0"
+      [max]="duration"
+      [appTime]="appTime"
+      (setAppTime)="setAppTime($event)"
+      (setSeekTime)="setSeekTime($event)"
+    ></app-seekbar>
+    <app-player
+      [activeSong]="activeSong$ | async"
+      [volume]="volume"
+      [isPlaying]="isPlaying$ | async"
+      [seekTime]="seekTime"
+      [repeat]="repeat"
+      (onEnded)="handleNextSong()"
+      (onTimeUpdate)="setAppTime($event)"
+      (onLoadedData)="setDuration($event)"
+    ></app-player>
+  </div>
+  <app-volume-bar
+    [value]="volume"
+    [min]="0"
+    [max]="1"
+    (setVolume)="setVolume($event)"
+  ></app-volume-bar>
+</div>

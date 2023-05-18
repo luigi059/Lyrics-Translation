@@ -1,0 +1,21 @@
+<div class="flex-1 flex items-center justify-start">
+  <div
+    class="{{
+      isPlaying && isActive ? 'animate-spin-3s-linear-infinite' : ''
+    }} hidden sm:block h-16 w-16 mr-4"
+  >
+    <img
+      [src]="activeSong?.images?.coverart"
+      alt="cover art"
+      class="rounded-full"
+    />
+  </div>
+  <div class="w-50%">
+    <p class="truncate text-white font-bold text-lg">
+      {{ activeSong?.title ? activeSong?.title : "No active Song" }}
+    </p>
+    <p class="truncate text-gray-300">
+      {{ activeSong?.subtitle ? activeSong?.subtitle : "No active Song" }}
+    </p>
+  </div>
+</div>
