@@ -1,1 +1,22 @@
-<p>top-artists works!</p>
+<div class="flex flex-col">
+  <ng-container *ngIf="!isLoading && !error">
+    <h2 class="font-bold text-3xl text-white text-left mt-4 mb-10">
+      Top Artists
+    </h2>
+
+    <div class="flex flex-wrap sm:justify-start justify-center gap-8">
+      <app-artist-card
+        *ngFor="let track of data$ | async"
+        [track]="track"
+      ></app-artist-card>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="isLoading">
+    <app-loader title="Loading artists..."></app-loader>
+  </ng-container>
+
+  <ng-container *ngIf="error">
+    <app-error></app-error>
+  </ng-container>
+</div>

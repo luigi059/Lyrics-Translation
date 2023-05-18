@@ -1,0 +1,23 @@
+<div class="flex flex-col" *ngIf="!isLoading">
+  <ng-container *ngIf="!isLoading && !error">
+    <app-details-header
+      [artistId]="artistId"
+      [artistData]="(data$ | async)?.data[0]"
+    ></app-details-header>
+
+    <app-related-songs
+      [data]="(data$ | async)?.data[0].views['top-songs']?.data"
+      [artistId]="artistId"
+      [isPlaying]="isPlaying$ | async"
+      [activeSong]="activeSong$ | async"
+    ></app-related-songs>
+  </ng-container>
+
+  <ng-container *ngIf="isLoading">
+    <app-loader title="Loading artist details..."></app-loader>
+  </ng-container>
+
+  <ng-container *ngIf="error">
+    <app-error></app-error>
+  </ng-container>
+</div>

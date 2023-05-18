@@ -9,22 +9,28 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { ArtistCardComponent } from './components/artist-card/artist-card.component';
+import { DetailsHeaderComponent } from './components/details-header/details-header.component';
 import { ErrorComponent } from './components/error/error.component';
 import { LoaderComponent } from './components/loader/loader.component';
+import { ControlsComponent } from './components/music-player/controls/controls.component';
+import { MusicPlayerComponent } from './components/music-player/music-player.component';
+import { PlayerComponent } from './components/music-player/player/player.component';
+import { SeekbarComponent } from './components/music-player/seekbar/seekbar.component';
+import { TrackComponent } from './components/music-player/track/track.component';
+import { VolumeBarComponent } from './components/music-player/volume-bar/volume-bar.component';
+import { PlayPauseComponent } from './components/play-pause/play-pause.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { SongCardComponent } from './components/song-card/song-card.component';
 import { AroundYouComponent } from './pages/around-you/around-you.component';
+import { ArtistDetailsComponent } from './pages/artist-details/artist-details.component';
 import { DiscoverComponent } from './pages/discover/discover.component';
 import { TopArtistsComponent } from './pages/top-artists/top-artists.component';
 import { TopChartsComponent } from './pages/top-charts/top-charts.component';
+import { ReplacePipe } from './shared/replace.pipe';
 import { playerReducer } from './store/player.reducer';
-import { PlayPauseComponent } from './components/play-pause/play-pause.component';
-import { MusicPlayerComponent } from './components/music-player/music-player.component';
-import { TrackComponent } from './components/music-player/track/track.component';
-import { ControlsComponent } from './components/music-player/controls/controls.component';
-import { SeekbarComponent } from './components/music-player/seekbar/seekbar.component';
-import { PlayerComponent } from './components/music-player/player/player.component';
-import { VolumeBarComponent } from './components/music-player/volume-bar/volume-bar.component';
+import { RelatedSongsComponent } from './components/related-songs/related-songs.component';
+import { SongBarComponent } from './components/song-bar/song-bar.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +50,12 @@ import { VolumeBarComponent } from './components/music-player/volume-bar/volume-
     SeekbarComponent,
     PlayerComponent,
     VolumeBarComponent,
+    ArtistCardComponent,
+    ArtistDetailsComponent,
+    DetailsHeaderComponent,
+    ReplacePipe,
+    RelatedSongsComponent,
+    SongBarComponent,
   ],
   imports: [
     BrowserModule,
