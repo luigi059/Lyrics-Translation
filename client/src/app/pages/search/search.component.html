@@ -4,13 +4,13 @@
       Showing results for <span class="font-black">{{ searchTerm }}</span>
     </h2>
     <div class="flex flex-wrap sm:justify-start justify-center gap-8">
-      <ng-container *ngIf="data$ | async as data">
-        <div *ngFor="let song of data.tracks.hits; let i = index">
+      <ng-container *ngIf="data">
+        <div *ngFor="let song of data; let i = index">
           <app-song-card
             [song]="song.track"
             [isPlaying]="isPlaying$ | async"
             [activeSong]="activeSong$ | async"
-            [data]="data"
+            [data]="song.track"
             [i]="i"
           >
           </app-song-card>

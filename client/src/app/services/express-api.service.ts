@@ -32,19 +32,53 @@ export class ExpressAPI {
     translation: string,
     songId: string,
     name: string,
-    picturePath: string
+    picturePath: string,
+    requestId?: string
   ) {
     const headers = new HttpHeaders({
       Authorization: this.token,
     });
+    if (requestId) {
+      return this.http.post(
+        `${this.baseUrl}translation/request/grant`,
+        {
+          songId: songId,
+          translation: translation,
+          language: language,
+          translator: name,
+          translatorPicturePath: picturePath,
+          requestId: requestId,
+        },
+        {
+          headers: headers,
+        }
+      );
+    } else {
+      return this.http.post(
+        `${this.baseUrl}translation/create/`,
+        {
+          songId: songId,
+          translation: translation,
+          language: language,
+          translator: name,
+          translatorPicturePath: picturePath,
+        },
+        {
+          headers: headers,
+        }
+      );
+    }
+  }
+  makeRequest(songId: string, name: string, language: string) {
+    const headers = new HttpHeaders({
+      Authorization: this.token,
+    });
     return this.http.post(
-      `${this.baseUrl}translation/create/`,
+      `${this.baseUrl}translation/request/`,
       {
         songId: songId,
-        translation: translation,
         language: language,
-        translator: name,
-        translatorPicturePath: picturePath,
+        owner: name,
       },
       {
         headers: headers,

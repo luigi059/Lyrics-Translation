@@ -43,6 +43,7 @@ export class DiscoverComponent implements OnInit {
     this.genreListId$.subscribe((genreListId) => {
       this.shazamCoreService.getSongsByGenre(genreListId || 'POP').subscribe(
         (data) => {
+          console.log(data);
           this.data$ = of(data);
           this.isLoading = false;
         },

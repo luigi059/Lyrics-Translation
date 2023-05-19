@@ -1,44 +1,47 @@
-<div class="relative w-full flex flex-col">
-  <div
-    class="w-full bg-gradient-to-l from-transparent to-black sm:h-48 h-28"
-  ></div>
+<div>
+  <div class="relative w-full flex flex-col">
+    <div
+      class="w-full bg-gradient-to-l from-transparent to-black sm:h-48 h-28"
+    ></div>
 
-  <div class="absolute inset-0 flex items-center">
-    <img
-      alt="profile"
-      [src]="
-        artistId
-          ? (artistData?.attributes?.artwork?.url
-            | replace : '{w}' : '500'
-            | replace : '{h}' : '500')
-          : songData?.images?.coverart
-      "
-      class="sm:w-48 w-28 sm:h-48 h-28 rounded-full object-cover border-2 shadow-xl shadow-black"
-    />
-
-    <div class="ml-5">
-      <p class="font-bold sm:text-3xl text-xl text-white">
-        {{ artistId ? artistData?.attributes?.name : songData?.title }}
-      </p>
-
-      <ng-container *ngIf="!artistId">
-        <a
-          [routerLink]="['/artists', songData?.artists[0]?.adamid]"
-          class="text-base text-gray-400 mt-2"
-        >
-          {{ songData?.subtitle }}
-        </a>
-      </ng-container>
-
-      <p class="text-base text-gray-400 mt-2">
-        {{
+    <div class="absolute inset-0 flex items-center">
+      <img
+        alt="profile"
+        [src]="
           artistId
-            ? artistData?.attributes?.genreNames[0]
-            : songData?.genres?.primary
-        }}
-      </p>
-    </div>
-  </div>
+            ? (artistData?.attributes?.artwork?.url
+              | replace : '{w}' : '500'
+              | replace : '{h}' : '500')
+            : songData?.images?.coverart
+        "
+        class="sm:w-48 w-28 sm:h-48 h-28 rounded-full object-cover border-2 shadow-xl shadow-black"
+      />
 
-  <div class="w-full sm:h-44 h-24"></div>
+      <div class="ml-5">
+        <p class="font-bold sm:text-3xl text-xl text-white">
+          {{ artistId ? artistData?.attributes?.name : songData?.title }}
+        </p>
+
+        <ng-container *ngIf="!artistId">
+          <a
+            [routerLink]="['/artists', songData?.artists[0]?.adamid]"
+            class="text-base text-gray-400 mt-2"
+          >
+            {{ songData?.subtitle }}
+          </a>
+        </ng-container>
+
+        <p class="text-base text-gray-400 mt-2">
+          {{
+            artistId
+              ? artistData?.attributes?.genreNames[0]
+              : songData?.genres?.primary
+          }}
+        </p>
+      </div>
+    </div>
+
+    <div class="w-full sm:h-44 h-24"></div>
+  </div>
+  <div [innerHTML]="artistBio" class="mb-5 text-gray-400 text-lg"></div>
 </div>

@@ -31,7 +31,7 @@ export class SongDetailsComponent implements OnInit {
   activeSong$: Observable<any> | undefined;
   isPlaying$: Observable<boolean> | undefined;
   data: any | undefined;
-  translations: any;
+  songDatav2: any;
   isList: boolean = true;
   selectedTranslation: any;
   isDropdownOpen: boolean = false;
@@ -43,6 +43,11 @@ export class SongDetailsComponent implements OnInit {
   translationText: string = '';
   user$: Observable<any>;
   user: any;
+  isTranslations: boolean = true;
+  pageType: string = 'Translations';
+  isSelectDisbaled = false;
+  requestId: string;
+  isOpenRequest: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -73,7 +78,7 @@ export class SongDetailsComponent implements OnInit {
 
     this.expressApi
       .getSongTranslations(this.songId)
-      .subscribe((data: any) => (this.translations = data.songTranslations));
+      .subscribe((data: any) => (this.songDatav2 = data.songData));
 
     this.fetchLanguages();
   }
@@ -120,6 +125,12 @@ export class SongDetailsComponent implements OnInit {
     }
   }
 
+  onPageTypeChange(event: any) {
+    this.pageType = event.target.value;
+    if (this.pageType === 'translation') this.isTranslations = true;
+    if (this.pageType === 'requests') this.isTranslations = false;
+  }
+
   selectLanguage(language: string) {
     this.selectedLanguage = language;
     this.showDropdown = false;
@@ -143,10 +154,23 @@ export class SongDetailsComponent implements OnInit {
   viewTranslations() {
     this.isList = true;
   }
-  openTranslation() {
+  openTranslation(language?: string, requestId?: string) {
     const token = localStorage.getItem('token');
     if (!token) window.alert('Please Sign in');
     else this.isDropdownOpen = true;
+    if (language) {
+      this.selectedLanguage = language;
+      this.isSelectDisbaled = true;
+      this.requestId = requestId;
+    } else {
+      this.selectedLanguage = undefined;
+      this.isSelectDisbaled = false;
+      this.requestId = undefined;
+    }
+  }
+
+  openRequest() {
+    this.isOpenRequest = true;
   }
 
   submitTranslation() {
@@ -159,12 +183,28 @@ export class SongDetailsComponent implements OnInit {
         this.translationText,
         this.songId,
         this.user.user.name,
-        this.user.user.picturePath
+        this.user.user.picturePath,
+        this.requestId
       )
       .subscribe(
         (data: any) => {
-          this.translations = data.songTranslations;
+          this.songDatav2 = data.songData;
           this.isDropdownOpen = false;
+        },
+        (err) => {
+          console.log(err);
+          window.alert(err.error.error);
+        }
+      );
+  }
+
+  submitRequest() {
+    this.expressApi
+      .makeRequest(this.songId, this.user.user.name, this.selectedLanguage)
+      .subscribe(
+        (data: any) => {
+          this.songDatav2 = data.songData;
+          this.isOpenRequest = false;
         },
         (err) => {
           console.log(err);

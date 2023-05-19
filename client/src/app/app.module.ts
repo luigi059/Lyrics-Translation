@@ -36,6 +36,7 @@ import { TopArtistsComponent } from './pages/top-artists/top-artists.component';
 import { TopChartsComponent } from './pages/top-charts/top-charts.component';
 import { ReplacePipe } from './shared/replace.pipe';
 import { playerReducer } from './store/player.reducer';
+import { TranslationsComponent } from './pages/translations/translations.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +66,7 @@ import { playerReducer } from './store/player.reducer';
     SearchComponent,
     SearchbarComponent,
     AuthComponent,
+    TranslationsComponent,
   ],
   imports: [
     BrowserModule,

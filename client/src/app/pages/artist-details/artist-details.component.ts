@@ -34,7 +34,8 @@ export class ArtistDetailsComponent {
     this.isPlaying$ = store.pipe(select('player', 'isPlaying'));
     this.artistId = this.route.snapshot.paramMap.get('id') || '';
     this.shazamCoreService.getArtistDetails(this.artistId).subscribe(
-      (data) => {
+      (data: any) => {
+        console.log(data.data[0].views['top-songs']);
         this.data$ = of(data);
         this.isLoading = false;
       },

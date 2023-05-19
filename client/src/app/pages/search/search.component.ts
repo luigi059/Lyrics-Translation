@@ -21,7 +21,7 @@ interface State {
 export class SearchComponent implements OnInit {
   activeSong$: Observable<any>;
   isPlaying$: Observable<boolean>;
-  data$: Observable<any> | undefined;
+  data: any | undefined;
   songs: any;
   isLoading: boolean = true;
   error: boolean = false;
@@ -41,7 +41,16 @@ export class SearchComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.searchTerm = params['searchTerm'];
-      this.data$ = this.shazamCoreService.getSongsBySearch(this.searchTerm);
+      this.shazamCoreService.getSongsBySearch(this.searchTerm).subscribe(
+        (data: any) => {
+          console.log(data);
+          this.data = data.tracks.hits;
+          this.isLoading = false;
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
     });
   }
 
