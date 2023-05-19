@@ -27,7 +27,7 @@
         <div class="profile-container">
           <div (click)="toggleDropdown()">
             <img
-              [src]="user.user.picturePath"
+              [src]="user.user.picturePath | async"
               height="32px"
               width="32px"
               class="profile-img"

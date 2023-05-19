@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class ExpressAPI {
   private baseUrl = 'http://localhost:5000/api/';
+  token = localStorage.getItem('token');
 
   constructor(private http: HttpClient) {}
 
@@ -22,5 +23,32 @@ export class ExpressAPI {
     return this.http.get(`${this.baseUrl}user/info`, {
       headers: headers,
     });
+  }
+  getSongTranslations(songId: string) {
+    return this.http.get(`${this.baseUrl}translation/song/${songId}`);
+  }
+  createSongTranslation(
+    language: string,
+    translation: string,
+    songId: string,
+    name: string,
+    picturePath: string
+  ) {
+    const headers = new HttpHeaders({
+      Authorization: this.token,
+    });
+    return this.http.post(
+      `${this.baseUrl}translation/create/`,
+      {
+        songId: songId,
+        translation: translation,
+        language: language,
+        translator: name,
+        translatorPicturePath: picturePath,
+      },
+      {
+        headers: headers,
+      }
+    );
   }
 }
